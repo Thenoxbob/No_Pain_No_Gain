@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sécurité réseau — No Pain No Gain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NO<span>PAIN</span>NOGAIN<span class="cursor-blink"></span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">// accueil</a></li>
+    <li><a href="bases.html">// bases</a></li>
+    <li><a href="materiel.html">// matériel</a></li>
+    <li><a href="securite.html" class="active">// sécurité</a></li>
+    <li><a href="conseils.html">// conseils</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">root</a> / <span>securite-reseau</span>
+  </div>
+
+  <div class="section">
+    <div class="content-layout">
+
+      <!-- SOMMAIRE -->
+      <aside class="sidebar">
+        <div class="sidebar-title">// sommaire</div>
+        <ul class="sidebar-nav">
+          <li><a href="#attaques">01. Principales attaques</a></li>
+          <li><a href="#mitm">02. Man-in-the-Middle</a></li>
+          <li><a href="#protections">03. Protections fondamentales</a></li>
+          <li><a href="#vpn">04. VPN</a></li>
+          <li><a href="#ids-ips">05. IDS / IPS</a></li>
+          <li><a href="#outils">06. Outils de sécurité</a></li>
+          <li><a href="#bonnes-pratiques">07. Bonnes pratiques</a></li>
+        </ul>
+      </aside>
+
+      <main>
+        <div class="section-header">
+          <div class="section-tag">// module 03 — threat intelligence</div>
+          <h2 class="section-title">Sécurité <span class="hl">Réseau</span></h2>
+          <p class="section-desc">Connaître les attaques pour mieux défendre. Chaque vulnérabilité a une contre-mesure. Apprenez les deux.</p>
+        </div>
+
+        <!-- 01 -->
+        <div class="topic" id="attaques">
+          <h3 class="topic-title"><span class="number">01</span> Principales attaques réseau</h3>
+          <p>Les attaques exploitent les failles des protocoles, des configurations, des logiciels ou du facteur humain. Voici les menaces les plus courantes et les plus dangereuses :</p>
+          <div class="attack-grid">
+            <div class="attack-card">
+              <h4>Phishing / Spear Phishing</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">E-mails ou sites frauduleux imitant des entités légitimes pour voler identifiants, mots de passe ou données bancaires. Le spear phishing cible une victime spécifique avec des infos personnalisées.</p>
+              <div class="attack-level"><span class="level-text">Fréquence</span><div class="level-bar"><div class="level-fill" style="width:95%"></div></div><span class="level-text">95%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>Ransomware</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Logiciel malveillant qui chiffre toutes les données et réclame une rançon (souvent en cryptomonnaie) pour les restituer. Les sauvegardes hors-ligne sont la seule vraie protection.</p>
+              <div class="attack-level"><span class="level-text">Impact</span><div class="level-bar"><div class="level-fill" style="width:95%"></div></div><span class="level-text">95%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>DDoS</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Saturation d'un serveur ou d'une infrastructure par des millions de requêtes simultanées via un botnet. Rend le service indisponible sans même avoir besoin de l'infiltrer.</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:85%"></div></div><span class="level-text">85%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>Man-in-the-Middle (MITM)</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">L'attaquant se positionne entre deux parties qui communiquent, intercepte et peut modifier les échanges à leur insu. Souvent sur Wi-Fi public.</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:80%"></div></div><span class="level-text">80%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>Brute Force / Credential Stuffing</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Tentative systématique de tous les mots de passe possibles, ou utilisation de bases de données de mots de passe volés (credential stuffing). Ciblé sur SSH, RDP, interfaces web.</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:75%"></div></div><span class="level-text">75%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>SQL Injection</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Injection de code SQL malveillant dans un formulaire ou une URL pour accéder, modifier ou supprimer des données en base. Toujours dans le OWASP Top 10.</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:80%"></div></div><span class="level-text">80%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>ARP Spoofing / Poisoning</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Envoi de fausses réponses ARP pour associer l'adresse MAC de l'attaquant à l'IP de la passerelle. Tout le trafic passe alors par l'attaquant (MITM local).</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:70%"></div></div><span class="level-text">70%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>DNS Spoofing / Cache Poisoning</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Corruption du cache DNS d'un résolveur pour rediriger les utilisateurs vers un site malveillant même en tapant la bonne URL. DNSSEC protège contre cela.</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:72%"></div></div><span class="level-text">72%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>Rogue DHCP / AP</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Serveur DHCP ou point d'accès Wi-Fi malveillant sur le réseau local qui distribue de fausses configurations (fausse passerelle, faux DNS) pour intercepter le trafic.</p>
+              <div class="attack-level"><span class="level-text">Danger</span><div class="level-bar"><div class="level-fill" style="width:65%"></div></div><span class="level-text">65%</span></div>
+            </div>
+            <div class="attack-card">
+              <h4>Zero-Day</h4>
+              <p style="font-size:0.85rem;color:var(--muted);">Exploitation d'une vulnérabilité inconnue du fabricant ou non encore corrigée. Aucun patch disponible au moment de l'attaque — détection uniquement comportementale.</p>
+              <div class="attack-level"><span class="level-text">Impact</span><div class="level-bar"><div class="level-fill" style="width:90%"></div></div><span class="level-text">90%</span></div>
+            </div>
+          </div>
+          <div class="info-box warning">
+            <div class="info-label">// rappel légal</div>
+            Ces informations sont présentées à des fins <strong>éducatives et défensives uniquement</strong>. Toute tentative d'intrusion sur un système sans autorisation explicite est un délit pénal passible d'amendes et d'emprisonnement (loi Godfrain en France, CFAA aux USA).
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="topic" id="mitm">
+          <h3 class="topic-title"><span class="number">02</span> Anatomie d'une attaque Man-in-the-Middle</h3>
+          <p>L'attaque MITM est particulièrement insidieuse car les deux victimes ne réalisent pas qu'une tierce partie intercepte leurs communications. Voici comment elle se déroule en pratique :</p>
+          <div class="code-block">
+<pre><span class="comment"># Scénario : attaque ARP Spoofing sur réseau local</span>
+
+<span class="comment"># Situation normale</span>
+Victime (192.168.1.10)  ←→  Routeur (192.168.1.1)
+
+<span class="comment"># Après ARP Spoofing par l'attaquant (192.168.1.99)</span>
+Victime ARP cache : <span class="string">192.168.1.1</span> → <span class="keyword">MAC attaquant</span>
+Routeur ARP cache : <span class="string">192.168.1.10</span> → <span class="keyword">MAC attaquant</span>
+
+<span class="comment"># Résultat : tout le trafic passe par l'attaquant</span>
+Victime → Attaquant → Routeur → Internet
+Victime ← Attaquant ← Routeur ← Internet
+
+<span class="comment"># Protections :</span>
+<span class="comment"># - HTTPS (TLS) rend l'interception illisible</span>
+<span class="comment"># - VPN chiffre tout le trafic</span>
+<span class="comment"># - ARP inspection sur les switches managés</span>
+<span class="comment"># - HSTS strict sur les serveurs web</span></pre>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="topic" id="protections">
+          <h3 class="topic-title"><span class="number">03</span> Protections fondamentales</h3>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">01</div>
+              <div class="step-content">
+                <h4>Segmentation avec des VLANs</h4>
+                <p>Isoler les équipements par zones fonctionnelles (bureaux, serveurs, invités, IoT, VoIP). Si un équipement est compromis, l'attaquant ne peut pas se déplacer latéralement vers d'autres segments sans passer le firewall.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">02</div>
+              <div class="step-content">
+                <h4>Firewall avec politique "deny all by default"</h4>
+                <p>Tout ce qui n'est pas explicitement autorisé est refusé. C'est le principe du moindre privilège appliqué au réseau. Définir des règles précises par source, destination, port et protocole.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">03</div>
+              <div class="step-content">
+                <h4>Chiffrement des communications</h4>
+                <p>HTTPS / TLS 1.3 pour le web. WPA3 pour le Wi-Fi. VPN pour les accès distants. SSH pour l'administration. Ne jamais transmettre de données sensibles en clair sur le réseau.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">04</div>
+              <div class="step-content">
+                <h4>Authentification forte (MFA)</h4>
+                <p>Activer l'authentification multi-facteurs sur tous les comptes critiques. Un mot de passe volé seul ne suffit plus pour se connecter. Utiliser RADIUS + 802.1X pour l'accès réseau en entreprise.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">05</div>
+              <div class="step-content">
+                <h4>Mise à jour systématique</h4>
+                <p>90% des attaques exploitent des vulnérabilités connues avec un patch disponible. Appliquer les mises à jour critiques dans les 24–72h. Automatiser le patching des systèmes non critiques.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">06</div>
+              <div class="step-content">
+                <h4>Monitoring et alertes</h4>
+                <p>Centraliser les logs (SIEM), surveiller les anomalies de trafic, configurer des alertes sur les événements suspects : connexions en dehors des heures, tentatives de brute force, communication vers des IPs malveillantes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="topic" id="vpn">
+          <h3 class="topic-title"><span class="number">04</span> VPN — Virtual Private Network</h3>
+          <p>Un VPN crée un <strong>tunnel chiffré</strong> entre deux points, protégeant le trafic des interceptions même sur un réseau non sécurisé (Wi-Fi public, Internet). Il masque également l'adresse IP réelle de l'utilisateur.</p>
+          <table class="data-table">
+            <thead><tr><th>Protocole VPN</th><th>Ports</th><th>Points forts</th><th>Cas d'usage</th></tr></thead>
+            <tbody>
+              <tr><td><strong>OpenVPN</strong></td><td>1194/UDP ou 443/TCP</td><td>Open source, très sûr, très flexible</td><td>Accès distant entreprise, client VPN</td></tr>
+              <tr><td><strong>WireGuard</strong></td><td>51820/UDP</td><td>Très rapide, code minimal (4 000 lignes vs 70 000), moderne</td><td>Site-to-site, client VPN moderne</td></tr>
+              <tr><td><strong>IPsec/IKEv2</strong></td><td>500/UDP, 4500/UDP</td><td>Natif sur iOS/Android/Windows, très stable</td><td>VPN mobile, site-to-site</td></tr>
+              <tr><td><strong>L2TP/IPsec</strong></td><td>1701/UDP</td><td>Bien supporté mais plus lent</td><td>Compatibilité legacy</td></tr>
+              <tr><td><strong>SSL/TLS (HTTPS)</strong></td><td>443/TCP</td><td>Passe partout (même derrière proxy), pas de client spécial</td><td>VPN web, portails d'entreprise</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box success">
+            <div class="info-label">// WireGuard en 2024</div>
+            WireGuard est devenu le standard de facto pour les nouveaux déploiements VPN. Il est intégré dans le noyau Linux depuis 5.6, supporte Windows, macOS, iOS et Android, et offre des performances significativement supérieures à OpenVPN.
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="topic" id="ids-ips">
+          <h3 class="topic-title"><span class="number">05</span> IDS / IPS — Détection et Prévention d'Intrusions</h3>
+          <p>Un <strong>IDS (Intrusion Detection System)</strong> analyse le trafic réseau et génère des alertes lorsqu'il détecte des comportements suspects. Il ne bloque rien — il observe et alerte.</p>
+          <p>Un <strong>IPS (Intrusion Prevention System)</strong> va plus loin : il analyse le trafic en temps réel et peut <strong>bloquer automatiquement</strong> le trafic malveillant avant qu'il n'atteigne sa cible.</p>
+          <div class="code-block">
+<pre><span class="comment"># Exemple de règle Snort/Suricata (IDS/IPS open source)</span>
+
+<span class="comment"># Détecter un scan de ports (nmap)</span>
+alert tcp any any -> $HOME_NET any (
+    msg:<span class="string">"SCAN nmap SYN scan"</span>;
+    flags:S;
+    threshold: type both, track by_src, count 20, seconds 1;
+    sid:1000001;
+)
+
+<span class="comment"># Bloquer les tentatives de connexion SSH en brute force</span>
+drop tcp any any -> $HOME_NET 22 (
+    msg:<span class="string">"SSH brute force attempt"</span>;
+    threshold: type both, track by_src, count 5, seconds 60;
+    sid:1000002;
+)</pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Méthode de détection</th><th>Principe</th><th>Avantages</th><th>Limites</th></tr></thead>
+            <tbody>
+              <tr><td>Basée sur signatures</td><td>Comparaison avec une base de signatures d'attaques connues</td><td>Précis pour les attaques connues, peu de faux positifs</td><td>Inefficace contre les zero-days et variantes</td></tr>
+              <tr><td>Basée sur anomalies</td><td>Détection des déviations par rapport au comportement normal (baseline)</td><td>Peut détecter des attaques inconnues</td><td>Nombreux faux positifs, profil de base difficile à établir</td></tr>
+              <tr><td>Analyse comportementale (IA)</td><td>Apprentissage automatique sur les flux réseau et logs</td><td>Adaptatif, détecte les APT et mouvements latéraux</td><td>Coûteux, nécessite du tuning</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 06 -->
+        <div class="topic" id="outils">
+          <h3 class="topic-title"><span class="number">06</span> Outils de sécurité incontournables</h3>
+          <table class="data-table">
+            <thead><tr><th>Outil</th><th>Type</th><th>Utilisation</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Wireshark</strong></td><td><span class="tag tag-blue">Analyse paquets</span></td><td>Capture et analyse le trafic réseau en temps réel — indispensable pour le diagnostic et la forensique</td></tr>
+              <tr><td><strong>Nmap</strong></td><td><span class="tag tag-green">Scan réseau</span></td><td>Découverte d'hôtes, scan de ports, détection de services et de versions, scan de vulnérabilités</td></tr>
+              <tr><td><strong>Metasploit Framework</strong></td><td><span class="tag tag-red">Pentest</span></td><td>Framework d'exploitation de vulnérabilités pour les tests d'intrusion autorisés — très utilisé en CTF</td></tr>
+              <tr><td><strong>Snort / Suricata</strong></td><td><span class="tag tag-blue">IDS/IPS</span></td><td>Détection et prévention d'intrusions réseau en temps réel, basé sur des règles</td></tr>
+              <tr><td><strong>OpenVPN / WireGuard</strong></td><td><span class="tag tag-green">VPN</span></td><td>Tunnels VPN chiffrés open source pour les accès distants sécurisés</td></tr>
+              <tr><td><strong>Burp Suite</strong></td><td><span class="tag tag-red">Web security</span></td><td>Proxy d'interception et suite d'outils pour les tests de sécurité des applications web (OWASP)</td></tr>
+              <tr><td><strong>Nessus / OpenVAS</strong></td><td><span class="tag tag-green">Scanner de vulnérab.</span></td><td>Audit automatique des vulnérabilités sur l'ensemble d'un réseau ou d'un système</td></tr>
+              <tr><td><strong>John the Ripper / Hashcat</strong></td><td><span class="tag tag-red">Password cracking</span></td><td>Test de robustesse des mots de passe hashés — audit légal sur ses propres systèmes</td></tr>
+              <tr><td><strong>pfSense / OPNsense</strong></td><td><span class="tag tag-blue">Firewall open source</span></td><td>Firewall/routeur complet basé sur FreeBSD — IDS/IPS, VPN, portail captif intégrés</td></tr>
+              <tr><td><strong>Splunk / ELK Stack</strong></td><td><span class="tag tag-green">SIEM</span></td><td>Centralisation, indexation et analyse des logs de sécurité — détection d'anomalies et corrélation d'événements</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box warning">
+            <div class="info-label">// utilisation légale uniquement</div>
+            Ces outils ne doivent être utilisés que sur des systèmes et réseaux dont vous avez l'<strong>autorisation écrite explicite</strong>. Tout scan ou test non autorisé constitue une infraction pénale. En France, la loi Godfrain (article 323-1 du Code pénal) prévoit jusqu'à 2 ans d'emprisonnement et 60 000 € d'amende.
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="topic" id="bonnes-pratiques">
+          <h3 class="topic-title"><span class="number">07</span> Bonnes pratiques quotidiennes</h3>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">✓</div>
+              <div class="step-content">
+                <h4>Mots de passe forts + gestionnaire de mots de passe</h4>
+                <p>Minimum 16 caractères aléatoires, unique par service. Utilisez un gestionnaire (Bitwarden, KeePass, 1Password) — il est impossible de mémoriser des dizaines de mots de passe forts différents.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">✓</div>
+              <div class="step-content">
+                <h4>Authentification à deux facteurs partout</h4>
+                <p>Activez le MFA sur tous les comptes critiques (email, banque, VPN, SSH). Préférez une application TOTP (Authy, Google Authenticator) à un SMS susceptible d'être intercepté (SIM swapping).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">✓</div>
+              <div class="step-content">
+                <h4>Sauvegardes régulières avec la règle 3-2-1</h4>
+                <p>3 copies des données, sur 2 supports différents, dont 1 copie hors-site (ou hors-ligne pour contrer les ransomwares). Testez la restauration régulièrement — une sauvegarde non testée ne vaut rien.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">✓</div>
+              <div class="step-content">
+                <h4>Principe du moindre privilège</h4>
+                <p>Chaque utilisateur, service ou application ne doit avoir que les droits strictement nécessaires à sa fonction. Un compte compromis avec des droits limités cause beaucoup moins de dégâts.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">✓</div>
+              <div class="step-content">
+                <h4>Former les utilisateurs au phishing</h4>
+                <p>80% des incidents de sécurité commencent par un e-mail de phishing. Des simulations régulières (PhishMe, GoPhish) sont plus efficaces que n'importe quelle formation théorique.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">✓</div>
+              <div class="step-content">
+                <h4>Plan de réponse aux incidents (IR Plan)</h4>
+                <p>Définir à l'avance : qui fait quoi, comment isoler un segment compromis, qui contacter (juridique, assurance, ANSSI en France). Ne pas improviser sous pression — chaque minute compte lors d'un incident majeur.</p>
+              </div>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-label">// philosophie fondamentale</div>
+            La sécurité n'est pas un état qu'on atteint — c'est un <strong>processus continu</strong>. Un réseau "sécurisé" aujourd'hui peut être vulnérable demain si les systèmes ne sont pas patchés, les configurations auditées et les équipes formées. La sécurité parfaite n'existe pas : l'objectif est de rendre l'attaque suffisamment coûteuse pour que l'attaquant passe à une cible plus facile.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a href="materiel.html" class="prev">Matériel réseau</a>
+    <a href="conseils.html" class="next">Conseils pour apprendre</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo">// NOPAINOGAIN.NETWORK</div>
+    <div class="footer-text">Fait avec rigueur · Appris dans la douleur · Maîtrisé dans la gloire</div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

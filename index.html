@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Pain No Gain — Réseaux Informatiques</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NO<span>PAIN</span>NOGAIN<span class="cursor-blink"></span></a>
+  <ul class="nav-links">
+    <li><a href="index.html"    class="active">// accueil</a></li>
+    <li><a href="bases.html">// bases</a></li>
+    <li><a href="materiel.html">// matériel</a></li>
+    <li><a href="securite.html">// sécurité</a></li>
+    <li><a href="conseils.html">// conseils</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-bg"></div>
+
+    <svg class="network-viz" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="cb"/>
+          <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#glow)" stroke="#00d4ff" stroke-width="1" fill="none" opacity="0.7">
+        <line x1="100" y1="150" x2="250" y2="200"/>
+        <line x1="250" y1="200" x2="380" y2="130"/>
+        <line x1="250" y1="200" x2="300" y2="350"/>
+        <line x1="300" y1="350" x2="150" y2="400"/>
+        <line x1="300" y1="350" x2="420" y2="430"/>
+        <line x1="100" y1="150" x2="50"  y2="300"/>
+        <line x1="50"  y1="300" x2="150" y2="400"/>
+        <line x1="380" y1="130" x2="420" y2="430"/>
+        <line x1="150" y1="400" x2="200" y2="530"/>
+        <line x1="420" y1="430" x2="350" y2="530"/>
+      </g>
+      <g fill="#00d4ff" opacity="0.9">
+        <circle cx="250" cy="200" r="8"/>
+        <circle cx="100" cy="150" r="5"/>
+        <circle cx="380" cy="130" r="5"/>
+        <circle cx="300" cy="350" r="6"/>
+        <circle cx="150" cy="400" r="5"/>
+        <circle cx="420" cy="430" r="5"/>
+        <circle cx="50"  cy="300" r="4"/>
+        <circle cx="200" cy="530" r="4"/>
+        <circle cx="350" cy="530" r="4"/>
+      </g>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-tag">// Formation Réseaux Informatiques v2.0</div>
+      <h1>
+        <span class="accent-line">No Pain</span>
+        <span class="gain-line">No Gain</span>
+      </h1>
+      <p class="hero-sub">Maîtrisez les réseaux informatiques de zéro. Du câble RJ45 aux architectures cloud, devenez l'expert que le terrain exige.</p>
+      <div class="hero-actions">
+        <a href="bases.html"   class="btn-primary">Commencer maintenant</a>
+        <a href="conseils.html" class="btn-outline">Voir le parcours</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">4<span>+</span></div>
+        <div class="stat-label">modules</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">OSI<span>7</span></div>
+        <div class="stat-label">couches</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">gratuit</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">// navigation des modules</div>
+      <h2 class="section-title">Choisir un <span class="hl">module</span></h2>
+      <p class="section-desc">Chaque module est conçu pour progresser étape par étape. Pas de raccourcis — juste de la rigueur.</p>
+    </div>
+    <div class="cards-grid">
+      <a href="bases.html" class="card">
+        <div class="card-icon">⬡</div>
+        <div class="card-title">Bases des réseaux</div>
+        <p class="card-text">Modèle OSI, protocoles TCP/IP, adressage IPv4/IPv6, types de réseaux LAN, WAN, MAN...</p>
+        <span class="card-link">Explorer le module</span>
+      </a>
+      <a href="materiel.html" class="card">
+        <div class="card-icon">⬡</div>
+        <div class="card-title">Matériel réseau</div>
+        <p class="card-text">Routeurs, switches, firewalls, serveurs, NIC... anatomie complète d'une infrastructure réseau.</p>
+        <span class="card-link">Explorer le module</span>
+      </a>
+      <a href="securite.html" class="card">
+        <div class="card-icon">⬡</div>
+        <div class="card-title">Sécurité réseau</div>
+        <p class="card-text">Attaques, vulnérabilités, outils de défense et bonnes pratiques de cybersécurité.</p>
+        <span class="card-link">Explorer le module</span>
+      </a>
+      <a href="conseils.html" class="card">
+        <div class="card-icon">⬡</div>
+        <div class="card-title">Conseils pour apprendre</div>
+        <p class="card-text">Ressources, certifications, feuille de route, labs pratiques et astuces de pros.</p>
+        <span class="card-link">Explorer le module</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">// NOPAINOGAIN.NETWORK</div>
+    <div class="footer-text">Fait avec rigueur · Appris dans la douleur · Maîtrisé dans la gloire</div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

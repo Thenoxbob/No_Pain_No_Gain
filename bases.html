@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bases des réseaux — No Pain No Gain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NO<span>PAIN</span>NOGAIN<span class="cursor-blink"></span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">// accueil</a></li>
+    <li><a href="bases.html" class="active">// bases</a></li>
+    <li><a href="materiel.html">// matériel</a></li>
+    <li><a href="securite.html">// sécurité</a></li>
+    <li><a href="conseils.html">// conseils</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">root</a> / <span>bases-des-reseaux</span>
+  </div>
+
+  <div class="section">
+    <div class="content-layout">
+
+      <!-- SOMMAIRE -->
+      <aside class="sidebar">
+        <div class="sidebar-title">// sommaire</div>
+        <ul class="sidebar-nav">
+          <li><a href="#definition">01. Qu'est-ce qu'un réseau</a></li>
+          <li><a href="#types">02. Types de réseaux</a></li>
+          <li><a href="#topologies">03. Topologies réseau</a></li>
+          <li><a href="#osi">04. Modèle OSI</a></li>
+          <li><a href="#tcpip">05. TCP/IP & protocoles</a></li>
+          <li><a href="#ip">06. Adressage IPv4</a></li>
+          <li><a href="#ipv6">07. IPv6</a></li>
+          <li><a href="#subnetting">08. Subnetting</a></li>
+          <li><a href="#dns">09. DNS</a></li>
+          <li><a href="#dhcp">10. DHCP</a></li>
+        </ul>
+      </aside>
+
+      <main>
+        <div class="section-header">
+          <div class="section-tag">// module 01</div>
+          <h2 class="section-title">Bases des <span class="hl">Réseaux</span></h2>
+          <p class="section-desc">Les fondations indispensables : comprendre comment les machines communiquent, s'identifient et échangent des données.</p>
+        </div>
+
+        <!-- 01 -->
+        <div class="topic" id="definition">
+          <h3 class="topic-title"><span class="number">01</span> Qu'est-ce qu'un réseau informatique ?</h3>
+          <p>Un réseau informatique est un ensemble de machines (ordinateurs, serveurs, smartphones, imprimantes…) interconnectées dans le but de <strong>partager des ressources et d'échanger des données</strong>. Ces connexions peuvent être filaires (câbles Ethernet, fibre) ou sans fil (Wi-Fi, Bluetooth, 4G/5G).</p>
+          <p>Un réseau repose sur trois composantes fondamentales : les <strong>nœuds</strong> (les équipements), les <strong>liens</strong> (les connexions entre eux), et les <strong>protocoles</strong> (les règles de communication communes).</p>
+          <p>Le principe de base est simple : chaque machine parle un même langage standardisé pour se comprendre, peu importe son fabricant ou son système d'exploitation. Un iPhone peut donc accéder à un serveur Linux hébergé sous Windows Azure — grâce aux protocoles.</p>
+          <div class="info-box">
+            <div class="info-label">// concept clé</div>
+            Un <strong>protocole</strong> est un ensemble de règles que les machines respectent pour se comprendre. Sans protocoles standardisés (TCP/IP, HTTP, DNS…), un Mac ne pourrait pas communiquer avec un PC Windows ou un serveur Linux.
+          </div>
+          <div class="code-block">
+<pre><span class="comment"># Commandes de diagnostic réseau de base</span>
+
+<span class="comment"># Tester la connectivité (couche 3 — réseau)</span>
+<span class="keyword">$</span> ping 192.168.1.1
+<span class="keyword">$</span> ping google.com
+
+<span class="comment"># Tracer la route d'un paquet jusqu'à destination</span>
+<span class="keyword">$</span> traceroute google.com       <span class="comment"># Linux / macOS</span>
+<span class="keyword">$</span> tracert google.com          <span class="comment"># Windows</span>
+
+<span class="comment"># Afficher les interfaces réseau et leurs adresses IP</span>
+<span class="keyword">$</span> ip addr show                <span class="comment"># Linux</span>
+<span class="keyword">$</span> ipconfig /all               <span class="comment"># Windows</span>
+<span class="keyword">$</span> ifconfig                    <span class="comment"># macOS / Linux (ancien)</span>
+
+<span class="comment"># Afficher la table de routage</span>
+<span class="keyword">$</span> ip route show
+<span class="keyword">$</span> netstat -rn</pre>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="topic" id="types">
+          <h3 class="topic-title"><span class="number">02</span> Types de réseaux</h3>
+          <p>Les réseaux sont classifiés selon leur <strong>étendue géographique</strong> et leur usage. Chaque type répond à des besoins spécifiques en termes de débit, latence et infrastructure.</p>
+          <table class="data-table">
+            <thead>
+              <tr><th>Type</th><th>Nom complet</th><th>Portée</th><th>Débit typique</th><th>Exemple concret</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="tag tag-blue">PAN</span></td><td>Personal Area Network</td><td>~10 m</td><td>1–100 Mbps</td><td>Bluetooth, USB, NFC</td></tr>
+              <tr><td><span class="tag tag-green">LAN</span></td><td>Local Area Network</td><td>Bâtiment / campus</td><td>100 Mbps – 10 Gbps</td><td>Réseau d'entreprise, maison</td></tr>
+              <tr><td><span class="tag tag-blue">WLAN</span></td><td>Wireless LAN</td><td>Local sans fil</td><td>100 Mbps – 9.6 Gbps</td><td>Wi-Fi bureau ou maison</td></tr>
+              <tr><td><span class="tag tag-red">MAN</span></td><td>Metropolitan Area Network</td><td>Ville / agglomération</td><td>1–100 Gbps</td><td>Réseau universitaire, fibre municipale</td></tr>
+              <tr><td><span class="tag tag-green">WAN</span></td><td>Wide Area Network</td><td>Pays / continent / monde</td><td>Variable</td><td>Internet, MPLS entreprise, SD-WAN</td></tr>
+              <tr><td><span class="tag tag-blue">SAN</span></td><td>Storage Area Network</td><td>Data center</td><td>8–32 Gbps</td><td>Réseau dédié au stockage (Fibre Channel)</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box warning">
+            <div class="info-label">// distinction importante</div>
+            Un réseau WAN n'est pas forcément public. Les grandes entreprises utilisent des <strong>WAN privés</strong> (MPLS, SD-WAN) pour relier leurs sites distants de façon sécurisée et garantie, sans dépendre d'Internet.
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="topic" id="topologies">
+          <h3 class="topic-title"><span class="number">03</span> Topologies réseau</h3>
+          <p>La <strong>topologie</strong> décrit comment les équipements sont physiquement ou logiquement organisés et connectés. Le choix de la topologie a des conséquences directes sur la résilience, les performances, les coûts et la facilité de dépannage.</p>
+          <table class="data-table">
+            <thead>
+              <tr><th>Topologie</th><th>Description</th><th>Avantages</th><th>Inconvénients</th><th>Usage typique</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Bus</strong></td><td>Tous les équipements partagent un câble unique (tronc commun)</td><td>Simple, économique</td><td>Panne du câble = réseau mort, collisions fréquentes</td><td>Réseaux anciens (coaxial)</td></tr>
+              <tr><td><strong>Étoile</strong></td><td>Chaque équipement est relié à un nœud central (switch ou hub)</td><td>Facile à dépanner, panne isolée par port</td><td>Si le switch tombe, tout s'arrête</td><td>Réseaux modernes (LAN Ethernet)</td></tr>
+              <tr><td><strong>Anneau</strong></td><td>Les équipements forment une boucle fermée, les données circulent dans un sens</td><td>Flux ordonné, pas de collision</td><td>Rupture d'un lien = panne totale</td><td>Token Ring (obsolète), SONET/SDH</td></tr>
+              <tr><td><strong>Maillée complète</strong></td><td>Chaque nœud est connecté directement à tous les autres</td><td>Très résiliente, redondance maximale</td><td>Très coûteuse, câblage complexe</td><td>Cœur de réseau critique, WAN ISP</td></tr>
+              <tr><td><strong>Maillée partielle</strong></td><td>Certains nœuds seulement sont interconnectés</td><td>Bon compromis résilience/coût</td><td>Moins redondant que le maillage complet</td><td>WAN entreprise, Internet backbone</td></tr>
+              <tr><td><strong>Arbre (hiérarchique)</strong></td><td>Extension de l'étoile sur plusieurs niveaux (core / distribution / accès)</td><td>Très scalable, bien structurée</td><td>Les nœuds parents sont des points de défaillance</td><td>Architecture d'entreprise standard</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box success">
+            <div class="info-label">// architecture d'entreprise standard</div>
+            Le modèle <strong>3-tiers</strong> de Cisco est la référence : <strong>Core</strong> (cœur de réseau haute vitesse), <strong>Distribution</strong> (agrégation, routage inter-VLAN, politiques de sécurité), <strong>Access</strong> (switches connectés aux postes de travail). Cette hiérarchie simplifie l'administration et isole les pannes.
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="topic" id="osi">
+          <h3 class="topic-title"><span class="number">04</span> Le Modèle OSI</h3>
+          <p>Le modèle OSI (Open Systems Interconnection), publié par l'ISO en 1984, découpe les communications réseau en <strong>7 couches abstraites</strong>. Chaque couche a un rôle précis et ne communique qu'avec les couches directement adjacentes.</p>
+          <p>Comprendre ce modèle est essentiel pour diagnostiquer les pannes : si le <code style="font-family:var(--mono);color:var(--accent3);">ping</code> fonctionne (couche 3) mais pas HTTPS (couche 7), le problème est applicatif — pas réseau.</p>
+          <table class="data-table">
+            <thead>
+              <tr><th>N°</th><th>Couche</th><th>Rôle</th><th>Protocoles / Technologies</th><th>Unité</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>7</td><td><strong>Application</strong></td><td>Interface utilisateur, services réseau (web, mail, DNS)</td><td>HTTP, HTTPS, FTP, SMTP, DNS, SSH, SNMP</td><td>Message</td></tr>
+              <tr><td>6</td><td><strong>Présentation</strong></td><td>Formatage des données, chiffrement, compression</td><td>SSL/TLS, JPEG, MPEG, ASCII, Unicode</td><td>Message</td></tr>
+              <tr><td>5</td><td><strong>Session</strong></td><td>Établissement, maintien et fermeture des sessions</td><td>NetBIOS, RPC, PPTP, SOCKS</td><td>Message</td></tr>
+              <tr><td>4</td><td><strong>Transport</strong></td><td>Segmentation, contrôle de flux, fiabilité bout-à-bout</td><td>TCP, UDP, SCTP</td><td>Segment / Datagramme</td></tr>
+              <tr><td>3</td><td><strong>Réseau</strong></td><td>Routage, adressage logique (IP), fragmentation</td><td>IPv4, IPv6, ICMP, ARP, OSPF, BGP</td><td>Paquet</td></tr>
+              <tr><td>2</td><td><strong>Liaison de données</strong></td><td>Accès au média, adressage MAC, détection d'erreurs</td><td>Ethernet, Wi-Fi (802.11), PPP, VLAN (802.1Q)</td><td>Trame</td></tr>
+              <tr><td>1</td><td><strong>Physique</strong></td><td>Transmission des bits bruts sur le support physique</td><td>RJ45, Fibre optique, Bluetooth, USB, DSL</td><td>Bit</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box success">
+            <div class="info-label">// mémos</div>
+            De haut en bas (7→1) : <strong>"Ah, Peu De Techniciens Réparent Les Pannes"</strong><br/>
+            De bas en haut (1→7) en anglais : <strong>"Please Do Not Throw Sausage Pizza Away"</strong>
+          </div>
+          <div class="info-box">
+            <div class="info-label">// OSI vs TCP/IP</div>
+            En pratique, on parle du modèle <strong>TCP/IP à 4 couches</strong> : Application (OSI 5-6-7), Transport (OSI 4), Internet (OSI 3), Accès réseau (OSI 1-2). Le modèle OSI reste la référence théorique pour l'enseignement et le diagnostic des pannes.
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="topic" id="tcpip">
+          <h3 class="topic-title"><span class="number">05</span> TCP/IP & protocoles essentiels</h3>
+          <p><strong>TCP (Transmission Control Protocol)</strong> garantit la livraison fiable et ordonnée des données via un processus de connexion en 3 étapes. Il est utilisé pour le web (HTTP/S), les emails, les transferts de fichiers (FTP/SFTP), SSH.</p>
+          <p><strong>UDP (User Datagram Protocol)</strong> est sans connexion et sans garantie de livraison. Il privilégie la vitesse sur la fiabilité — idéal pour le streaming vidéo, les jeux en ligne (où un paquet perdu est préférable à un paquet en retard), la VoIP, le DNS.</p>
+          <div class="code-block">
+<pre><span class="comment"># Le Three-Way Handshake TCP (établissement de connexion)</span>
+Client  → Serveur : <span class="string">SYN</span>      <span class="comment"># "Je veux me connecter, mon seq=1000"</span>
+Serveur → Client  : <span class="string">SYN-ACK</span>  <span class="comment"># "OK, mon seq=5000, j'attends seq=1001"</span>
+Client  → Serveur : <span class="string">ACK</span>      <span class="comment"># "Reçu, j'attends seq=5001 — connexion ouverte !"</span>
+
+<span class="comment"># Fermeture propre TCP (4-way handshake)</span>
+Client  → Serveur : <span class="string">FIN</span>      <span class="comment"># "Je n'ai plus rien à envoyer"</span>
+Serveur → Client  : <span class="string">ACK</span>
+Serveur → Client  : <span class="string">FIN</span>      <span class="comment"># "Moi non plus"</span>
+Client  → Serveur : <span class="string">ACK</span>      <span class="comment"># Connexion fermée</span></pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Protocole</th><th>Port(s)</th><th>Transport</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>HTTP</td><td>80</td><td>TCP</td><td>Navigation web non chiffrée</td></tr>
+              <tr><td>HTTPS</td><td>443</td><td>TCP</td><td>Navigation web chiffrée (TLS 1.2/1.3)</td></tr>
+              <tr><td>SSH</td><td>22</td><td>TCP</td><td>Accès terminal distant sécurisé</td></tr>
+              <tr><td>FTP</td><td>21 (contrôle) / 20 (données)</td><td>TCP</td><td>Transfert de fichiers (non chiffré)</td></tr>
+              <tr><td>SFTP</td><td>22</td><td>TCP</td><td>Transfert de fichiers via SSH</td></tr>
+              <tr><td>SMTP</td><td>25 / 587 (avec TLS)</td><td>TCP</td><td>Envoi d'e-mails entre serveurs</td></tr>
+              <tr><td>IMAP</td><td>143 / 993 (TLS)</td><td>TCP</td><td>Consultation d'e-mails (synchronisé)</td></tr>
+              <tr><td>POP3</td><td>110 / 995 (TLS)</td><td>TCP</td><td>Téléchargement d'e-mails (local)</td></tr>
+              <tr><td>DNS</td><td>53</td><td>UDP (+ TCP pour transferts de zone)</td><td>Résolution de noms de domaine</td></tr>
+              <tr><td>DHCP</td><td>67 (serveur) / 68 (client)</td><td>UDP</td><td>Attribution automatique d'adresses IP</td></tr>
+              <tr><td>SNMP</td><td>161 / 162 (trap)</td><td>UDP</td><td>Supervision réseau (état des équipements)</td></tr>
+              <tr><td>NTP</td><td>123</td><td>UDP</td><td>Synchronisation de l'heure réseau</td></tr>
+              <tr><td>RDP</td><td>3389</td><td>TCP</td><td>Bureau à distance Windows</td></tr>
+              <tr><td>LDAP</td><td>389 / 636 (LDAPS)</td><td>TCP</td><td>Annuaire (Active Directory, OpenLDAP)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 06 -->
+        <div class="topic" id="ip">
+          <h3 class="topic-title"><span class="number">06</span> Adressage IPv4</h3>
+          <p>Une adresse IPv4 est un identifiant <strong>numérique de 32 bits</strong>, noté en quatre octets séparés par des points. Exemple : <code style="font-family:var(--mono);color:var(--accent3);">192.168.1.42</code> (chaque nombre est compris entre 0 et 255).</p>
+          <p>Chaque adresse se divise en deux parties : la <strong>partie réseau</strong> (identifie le réseau) et la <strong>partie hôte</strong> (identifie la machine). Le <strong>masque de sous-réseau</strong> détermine où se trouve la frontière.</p>
+          <table class="data-table">
+            <thead><tr><th>Classe</th><th>Plage d'adresses</th><th>Masque par défaut</th><th>Nb d'hôtes/réseau</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag-green">Classe A</span></td><td>1.0.0.0 – 126.255.255.255</td><td>/8 (255.0.0.0)</td><td>~16,7 millions</td></tr>
+              <tr><td><span class="tag tag-blue">Classe B</span></td><td>128.0.0.0 – 191.255.255.255</td><td>/16 (255.255.0.0)</td><td>65 534</td></tr>
+              <tr><td><span class="tag tag-red">Classe C</span></td><td>192.0.0.0 – 223.255.255.255</td><td>/24 (255.255.255.0)</td><td>254</td></tr>
+              <tr><td>Classe D</td><td>224.0.0.0 – 239.255.255.255</td><td>—</td><td>Multicast uniquement</td></tr>
+            </tbody>
+          </table>
+          <table class="data-table" style="margin-top:1.5rem;">
+            <thead><tr><th>Plage privée (RFC 1918)</th><th>CIDR</th><th>Hôtes disponibles</th><th>Usage typique</th></tr></thead>
+            <tbody>
+              <tr><td>10.0.0.0 – 10.255.255.255</td><td>/8</td><td>16 777 214</td><td>Grandes entreprises, data centers</td></tr>
+              <tr><td>172.16.0.0 – 172.31.255.255</td><td>/12</td><td>1 048 574</td><td>Réseaux d'entreprise moyens</td></tr>
+              <tr><td>192.168.0.0 – 192.168.255.255</td><td>/16</td><td>65 534</td><td>PME, réseau domestique</td></tr>
+              <tr><td>127.0.0.1</td><td>—</td><td>1</td><td>Loopback (tester la pile réseau locale)</td></tr>
+              <tr><td>169.254.x.x</td><td>/16</td><td>—</td><td>APIPA (auto-attribution sans DHCP)</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box warning">
+            <div class="info-label">// épuisement IPv4</div>
+            L'IANA a alloué ses derniers blocs IPv4 en <strong>2011</strong>. Les adresses publiques sont épuisées. C'est pourquoi le NAT est omniprésent (plusieurs machines partagent une seule IP publique) et la migration vers IPv6 s'accélère chaque année.
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="topic" id="ipv6">
+          <h3 class="topic-title"><span class="number">07</span> IPv6</h3>
+          <p>IPv6 est la version suivante du protocole IP, conçue pour pallier l'épuisement des adresses IPv4. Une adresse IPv6 est codée sur <strong>128 bits</strong>, notée en 8 groupes de 4 chiffres hexadécimaux séparés par des deux-points.</p>
+          <p>Exemple complet : <code style="font-family:var(--mono);color:var(--accent3);">2001:0db8:85a3:0000:0000:8a2e:0370:7334</code></p>
+          <p>Forme abrégée (groupes de zéros consécutifs remplacés par <code style="font-family:var(--mono);color:var(--accent);">::</code>) : <code style="font-family:var(--mono);color:var(--accent3);">2001:db8:85a3::8a2e:370:7334</code></p>
+          <table class="data-table">
+            <thead><tr><th>Caractéristique</th><th>IPv4</th><th>IPv6</th></tr></thead>
+            <tbody>
+              <tr><td>Taille de l'adresse</td><td>32 bits</td><td>128 bits</td></tr>
+              <tr><td>Nombre d'adresses</td><td>~4,3 milliards</td><td>340 undécillions (3,4 × 10³⁸)</td></tr>
+              <tr><td>Configuration</td><td>DHCP ou manuelle</td><td>Auto-configuration SLAAC ou DHCPv6</td></tr>
+              <tr><td>NAT nécessaire</td><td>Oui (pénurie)</td><td>Non (assez d'adresses pour tous)</td></tr>
+              <tr><td>Sécurité intégrée</td><td>Optionnelle (IPsec)</td><td>IPsec natif obligatoire</td></tr>
+              <tr><td>Broadcast</td><td>Oui</td><td>Non — remplacé par Multicast et Anycast</td></tr>
+              <tr><td>En-tête</td><td>Variable (20–60 octets)</td><td>Fixe (40 octets) — plus rapide à traiter</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box">
+            <div class="info-label">// adresses spéciales IPv6</div>
+            <strong>::1</strong> — Loopback (équivalent de 127.0.0.1)<br/>
+            <strong>fe80::/10</strong> — Adresses link-local (automatiques, non routables hors du lien)<br/>
+            <strong>fc00::/7</strong> — Adresses Unique Local (équivalent des RFC 1918 IPv4)<br/>
+            <strong>2001:db8::/32</strong> — Plage réservée à la documentation et aux exemples
+          </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="topic" id="subnetting">
+          <h3 class="topic-title"><span class="number">08</span> Subnetting (Sous-réseaux)</h3>
+          <p>Le <strong>subnetting</strong> consiste à découper un espace d'adressage IP en plusieurs sous-réseaux plus petits. C'est une compétence fondamentale : tous les examens réseau (CCNA, Network+) y consacrent une partie importante.</p>
+          <p>La notation <strong>CIDR</strong> (<em>Classless Inter-Domain Routing</em>) indique combien de bits servent à identifier le réseau. Un <strong>/24</strong> signifie 24 bits réseau → 8 bits pour les hôtes → 2⁸ − 2 = <strong>254 hôtes utilisables</strong>.</p>
+          <div class="code-block">
+<pre><span class="comment"># Exemple : découper 192.168.10.0/24 en 4 sous-réseaux égaux → /26</span>
+
+Adresse de départ  : <span class="string">192.168.10.0/24</span>
+Objectif           : <span class="keyword">4 sous-réseaux</span>
+Nouveau masque     : <span class="string">/26</span>  (255.255.255.192)
+Hôtes par sous-réseau : <span class="keyword">62</span>  (2^6 - 2)
+
+Sous-réseau 1 : <span class="string">192.168.10.0/26</span>    hôtes .1 → .62    broadcast .63
+Sous-réseau 2 : <span class="string">192.168.10.64/26</span>   hôtes .65 → .126  broadcast .127
+Sous-réseau 3 : <span class="string">192.168.10.128/26</span>  hôtes .129 → .190 broadcast .191
+Sous-réseau 4 : <span class="string">192.168.10.192/26</span>  hôtes .193 → .254 broadcast .255</pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>CIDR</th><th>Masque</th><th>Hôtes utilisables</th><th>Sous-réseaux dans un /24</th></tr></thead>
+            <tbody>
+              <tr><td>/24</td><td>255.255.255.0</td><td>254</td><td>1</td></tr>
+              <tr><td>/25</td><td>255.255.255.128</td><td>126</td><td>2</td></tr>
+              <tr><td>/26</td><td>255.255.255.192</td><td>62</td><td>4</td></tr>
+              <tr><td>/27</td><td>255.255.255.224</td><td>30</td><td>8</td></tr>
+              <tr><td>/28</td><td>255.255.255.240</td><td>14</td><td>16</td></tr>
+              <tr><td>/29</td><td>255.255.255.248</td><td>6</td><td>32</td></tr>
+              <tr><td>/30</td><td>255.255.255.252</td><td>2</td><td>64</td></tr>
+              <tr><td>/31</td><td>255.255.255.254</td><td>2 (sans réseau/broadcast)</td><td>Liens point-à-point uniquement</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box success">
+            <div class="info-label">// formule universelle</div>
+            <strong>Hôtes utilisables = 2^(32 − CIDR) − 2</strong><br/>
+            On soustrait 2 : l'adresse réseau (bits hôte tous à 0) et l'adresse broadcast (bits hôte tous à 1). Ces deux adresses ne peuvent pas être assignées à un équipement.
+          </div>
+        </div>
+
+        <!-- 09 -->
+        <div class="topic" id="dns">
+          <h3 class="topic-title"><span class="number">09</span> DNS — Domain Name System</h3>
+          <p>Le DNS est l'annuaire d'Internet. Il traduit les <strong>noms de domaine</strong> lisibles par l'humain (google.com) en <strong>adresses IP</strong> compréhensibles par les machines (142.250.74.46). Sans DNS, il faudrait mémoriser les IPs de chaque service.</p>
+          <p>La résolution est <strong>hiérarchique et récursive</strong> : le résolveur de votre FAI interroge les serveurs racines (.), puis les serveurs de domaine de premier niveau (.com, .fr…), puis les serveurs autoritaires du domaine cible.</p>
+          <div class="code-block">
+<pre><span class="comment"># Interroger le DNS en ligne de commande</span>
+<span class="keyword">$</span> nslookup google.com                   <span class="comment"># résolution simple</span>
+<span class="keyword">$</span> dig google.com A                       <span class="comment"># enregistrement IPv4</span>
+<span class="keyword">$</span> dig google.com AAAA                    <span class="comment"># enregistrement IPv6</span>
+<span class="keyword">$</span> dig google.com MX                      <span class="comment"># serveurs de messagerie</span>
+<span class="keyword">$</span> dig google.com TXT                     <span class="comment"># SPF, DKIM, DMARC...</span>
+<span class="keyword">$</span> dig -x 142.250.74.46                   <span class="comment"># résolution inverse (PTR)</span>
+<span class="keyword">$</span> dig @8.8.8.8 google.com               <span class="comment"># forcer le serveur DNS Google</span>
+
+<span class="comment"># Vider le cache DNS local</span>
+<span class="keyword">$</span> sudo systemd-resolve --flush-caches   <span class="comment"># Linux</span>
+<span class="keyword">$</span> ipconfig /flushdns                     <span class="comment"># Windows</span></pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Type</th><th>Rôle</th><th>Exemple</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag-blue">A</span></td><td>Nom → adresse IPv4</td><td>example.com → 93.184.216.34</td></tr>
+              <tr><td><span class="tag tag-blue">AAAA</span></td><td>Nom → adresse IPv6</td><td>example.com → 2606:2800::1</td></tr>
+              <tr><td><span class="tag tag-green">CNAME</span></td><td>Alias vers un autre nom de domaine</td><td>www.example.com → example.com</td></tr>
+              <tr><td><span class="tag tag-red">MX</span></td><td>Serveur(s) de messagerie entrant</td><td>aspmx.l.google.com (priorité 1)</td></tr>
+              <tr><td><span class="tag tag-green">TXT</span></td><td>Texte libre (SPF, DKIM, vérification…)</td><td>v=spf1 include:_spf.google.com ~all</td></tr>
+              <tr><td><span class="tag tag-blue">NS</span></td><td>Serveurs DNS autoritaires du domaine</td><td>ns1.example.com</td></tr>
+              <tr><td><span class="tag tag-red">PTR</span></td><td>Adresse IP → Nom (reverse DNS)</td><td>34.216.184.93.in-addr.arpa → example.com</td></tr>
+              <tr><td><span class="tag tag-green">SOA</span></td><td>Informations d'autorité de la zone DNS</td><td>Serveur primaire, email admin, numéro de série…</td></tr>
+              <tr><td><span class="tag tag-blue">SRV</span></td><td>Localisation d'un service spécifique</td><td>_sip._tcp.example.com → sip.example.com:5060</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box">
+            <div class="info-label">// serveurs DNS publics connus</div>
+            <strong>8.8.8.8 / 8.8.4.4</strong> — Google DNS<br/>
+            <strong>1.1.1.1 / 1.0.0.1</strong> — Cloudflare DNS (le plus rapide en 2024)<br/>
+            <strong>9.9.9.9</strong> — Quad9 (avec filtrage de domaines malveillants)
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="topic" id="dhcp">
+          <h3 class="topic-title"><span class="number">10</span> DHCP — Attribution automatique des IPs</h3>
+          <p>Le <strong>DHCP (Dynamic Host Configuration Protocol)</strong> permet à un serveur d'attribuer automatiquement une configuration réseau complète aux machines qui se connectent : adresse IP, masque de sous-réseau, passerelle par défaut, serveurs DNS.</p>
+          <p>Sans DHCP, chaque équipement devrait être configuré manuellement — impraticable dans une entreprise de plusieurs centaines de postes.</p>
+          <div class="code-block">
+<pre><span class="comment"># Le processus DHCP en 4 étapes — acronyme DORA</span>
+
+<span class="string">D</span>iscover → Client diffuse en broadcast    <span class="comment"># "Y a-t-il un serveur DHCP ?" (port 68→67)</span>
+<span class="string">O</span>ffer    → Serveur répond en unicast/BC    <span class="comment"># "Je t'offre 192.168.1.50, bail 24h"</span>
+<span class="string">R</span>equest  → Client demande officiellement   <span class="comment"># "J'accepte l'offre du serveur X"</span>
+<span class="string">A</span>ck      → Serveur confirme               <span class="comment"># "C'est à toi jusqu'à 14h demain"</span>
+
+<span class="comment"># Renouveler son bail DHCP manuellement</span>
+<span class="keyword">$</span> sudo dhclient -r eth0     <span class="comment"># Linux : libérer le bail</span>
+<span class="keyword">$</span> sudo dhclient eth0         <span class="comment"># Linux : demander un nouveau bail</span>
+<span class="keyword">$</span> ipconfig /release          <span class="comment"># Windows : libérer</span>
+<span class="keyword">$</span> ipconfig /renew            <span class="comment"># Windows : renouveler</span></pre>
+          </div>
+          <div class="info-box">
+            <div class="info-label">// bail DHCP et réservations</div>
+            Une adresse DHCP est temporaire — c'est un <strong>bail</strong> (lease). Pour les équipements qui doivent toujours avoir la même IP (serveurs, imprimantes, cameras IP), on utilise des <strong>réservations DHCP</strong> : l'adresse IP est fixée en fonction de l'adresse MAC de l'équipement. C'est plus souple qu'une IP statique car géré centralement.
+          </div>
+          <div class="info-box warning">
+            <div class="info-label">// DHCP Snooping</div>
+            Un serveur DHCP malveillant sur votre réseau peut distribuer de fausses configurations et intercepter le trafic (attaque MITM). La fonction <strong>DHCP Snooping</strong> des switches managés filtre les réponses DHCP : seuls les ports "de confiance" (trusted) peuvent envoyer des offres DHCP.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a href="index.html"    class="prev">Accueil</a>
+    <a href="materiel.html" class="next">Matériel réseau</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo">// NOPAINOGAIN.NETWORK</div>
+    <div class="footer-text">Fait avec rigueur · Appris dans la douleur · Maîtrisé dans la gloire</div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

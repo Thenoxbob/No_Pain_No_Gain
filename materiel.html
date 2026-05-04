@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Matériel réseau — No Pain No Gain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NO<span>PAIN</span>NOGAIN<span class="cursor-blink"></span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">// accueil</a></li>
+    <li><a href="bases.html">// bases</a></li>
+    <li><a href="materiel.html" class="active">// matériel</a></li>
+    <li><a href="securite.html">// sécurité</a></li>
+    <li><a href="conseils.html">// conseils</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">root</a> / <span>materiel-reseau</span>
+  </div>
+
+  <div class="section">
+    <div class="content-layout">
+
+      <!-- SOMMAIRE -->
+      <aside class="sidebar">
+        <div class="sidebar-title">// sommaire</div>
+        <ul class="sidebar-nav">
+          <li><a href="#switch">01. Switch</a></li>
+          <li><a href="#routeur">02. Routeur</a></li>
+          <li><a href="#firewall">03. Firewall</a></li>
+          <li><a href="#wifi">04. Point d'accès Wi-Fi</a></li>
+          <li><a href="#serveur">05. Serveur</a></li>
+          <li><a href="#cablage">06. Câblage</a></li>
+          <li><a href="#nic">07. Carte réseau (NIC)</a></li>
+          <li><a href="#vlan">08. VLANs</a></li>
+          <li><a href="#comparatif">09. Switch vs Routeur</a></li>
+        </ul>
+      </aside>
+
+      <main>
+        <div class="section-header">
+          <div class="section-tag">// module 02 — hardware</div>
+          <h2 class="section-title">Matériel <span class="hl">Réseau</span></h2>
+          <p class="section-desc">Chaque équipement joue un rôle précis. Comprendre leur fonctionnement permet de concevoir et dépanner n'importe quelle infrastructure.</p>
+        </div>
+
+        <!-- 01 -->
+        <div class="topic" id="switch">
+          <h3 class="topic-title"><span class="number">01</span> Switch (Commutateur)</h3>
+          <p>Le switch est l'équipement central d'un réseau local. Il opère en <strong>couche 2</strong> du modèle OSI et connecte les machines d'un même réseau en utilisant les <strong>adresses MAC</strong> pour diriger les trames uniquement vers le port destinataire.</p>
+          <p>Contrairement au hub (qui diffusait à tous les ports créant des collisions), le switch maintient une <strong>table MAC</strong> : à chaque port correspond une adresse MAC apprise dynamiquement. Le trafic est isolé et les performances sont maximisées.</p>
+          <div class="code-block">
+<pre><span class="comment"># Commandes de base sur un switch Cisco (IOS)</span>
+Switch> <span class="keyword">enable</span>
+Switch# <span class="keyword">show mac address-table</span>
+Vlan    Mac Address        Type    Ports
+----    ---------------    ----    -----
+   1    a4:c3:f0:1b:2d:3e  DYNAMIC Gi0/1
+   1    b8:27:eb:4d:2e:1a  DYNAMIC Gi0/3
+  10    00:1a:2b:3c:4d:5e  DYNAMIC Gi0/5
+
+Switch# <span class="keyword">show interfaces status</span>
+Port    Name   Status    Vlan  Duplex Speed
+Gi0/1          connected 1     a-full a-1G
+Gi0/2          notconnect 1    auto   auto</pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Type</th><th>Caractéristiques</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Switch non-managé</strong></td><td>Plug & play, aucune configuration</td><td>Domicile, petite structure</td></tr>
+              <tr><td><strong>Switch managé L2</strong></td><td>VLANs, STP, LACP, mirroring de ports, SNMP</td><td>PME, salle informatique</td></tr>
+              <tr><td><strong>Switch managé L3</strong></td><td>Tout ce qui est L2 + routage inter-VLAN, OSPF</td><td>Cœur de réseau entreprise</td></tr>
+              <tr><td><strong>Switch PoE</strong></td><td>Alimente les équipements via le câble Ethernet (VoIP, AP Wi-Fi, cameras)</td><td>Déploiement sans alimentation locale</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem;">
+            <span class="tag tag-blue">Couche 2</span>
+            <span class="tag tag-green">MAC</span>
+            <span class="tag tag-blue">VLAN</span>
+            <span class="tag tag-green">STP</span>
+            <span class="tag tag-red">PoE</span>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="topic" id="routeur">
+          <h3 class="topic-title"><span class="number">02</span> Routeur</h3>
+          <p>Le routeur opère en <strong>couche 3</strong> du modèle OSI. Son rôle est d'interconnecter des réseaux IP différents et de choisir le <strong>meilleur chemin</strong> pour acheminer chaque paquet à destination.</p>
+          <p>Il maintient une <strong>table de routage</strong> — soit configurée statiquement, soit construite dynamiquement via des protocoles de routage (OSPF, BGP, RIP). Il effectue également la <strong>translation d'adresses (NAT)</strong> permettant à un réseau privé d'accéder à Internet via une seule IP publique.</p>
+          <div class="code-block">
+<pre><span class="comment"># Afficher et comprendre une table de routage Linux</span>
+<span class="keyword">$</span> ip route show
+
+default via <span class="string">192.168.1.1</span> dev eth0          <span class="comment"># tout trafic non connu → passerelle</span>
+<span class="string">192.168.1.0/24</span> dev eth0 proto kernel      <span class="comment"># réseau local direct</span>
+<span class="string">10.0.0.0/8</span> via 192.168.1.254 dev eth0    <span class="comment"># route statique vers réseau privé</span>
+
+<span class="comment"># Sur un routeur Cisco IOS</span>
+Router# <span class="keyword">show ip route</span>
+C    192.168.1.0/24  directly connected, Gi0/0
+O    10.10.10.0/24   [110/2] via 192.168.1.254  <span class="comment"># route OSPF</span>
+S*   0.0.0.0/0       [1/0] via 203.0.113.1       <span class="comment"># route par défaut statique</span></pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Protocole de routage</th><th>Type</th><th>Métrique</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>RIP v2</td><td>Distance vector</td><td>Nombre de sauts (max 15)</td><td>Petits réseaux, obsolète</td></tr>
+              <tr><td>OSPF</td><td>Link-state</td><td>Coût (basé sur la bande passante)</td><td>Réseaux d'entreprise — standard</td></tr>
+              <tr><td>EIGRP</td><td>Hybride</td><td>Composite (BW, délai, charge…)</td><td>Réseaux Cisco exclusivement</td></tr>
+              <tr><td>BGP</td><td>Path vector</td><td>Attributs de chemin (AS PATH…)</td><td>Internet, entre FAI — le routage d'Internet</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem;">
+            <span class="tag tag-green">Couche 3</span>
+            <span class="tag tag-blue">IP</span>
+            <span class="tag tag-red">NAT</span>
+            <span class="tag tag-green">OSPF</span>
+            <span class="tag tag-blue">BGP</span>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="topic" id="firewall">
+          <h3 class="topic-title"><span class="number">03</span> Firewall (Pare-feu)</h3>
+          <p>Le firewall filtre le trafic réseau selon des <strong>règles de sécurité</strong> (politiques). Il peut être matériel (appliance dédiée) ou logiciel. C'est le premier rempart de toute infrastructure réseau.</p>
+          <p>Les <strong>NGFW (Next-Generation Firewall)</strong> vont bien au-delà du filtrage par ports : inspection profonde des paquets (DPI), identification des applications (peu importe le port), prévention d'intrusion (IPS) intégrée, déchiffrement SSL, filtrage par utilisateur.</p>
+          <div class="code-block">
+<pre><span class="comment"># Règles iptables Linux — exemples courants</span>
+
+<span class="comment"># Autoriser le trafic SSH entrant (port 22)</span>
+<span class="keyword">$</span> iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+<span class="comment"># Autoriser le trafic établi et lié (connexions déjà ouvertes)</span>
+<span class="keyword">$</span> iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+<span class="comment"># Bloquer tout le reste en entrée (règle par défaut)</span>
+<span class="keyword">$</span> iptables -P INPUT DROP
+
+<span class="comment"># Lister les règles actives</span>
+<span class="keyword">$</span> iptables -L -v -n</pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Type de firewall</th><th>Comment il filtre</th><th>Exemples</th></tr></thead>
+            <tbody>
+              <tr><td>Stateless (sans état)</td><td>Examine chaque paquet indépendamment (source/dest IP, port, protocole)</td><td>ACL sur routeurs Cisco</td></tr>
+              <tr><td>Stateful (avec état)</td><td>Suit l'état des connexions — autorise le retour des connexions sortantes</td><td>iptables, pfSense, Windows Firewall</td></tr>
+              <tr><td>NGFW / UTM</td><td>DPI, IPS, filtrage applicatif, antivirus, déchiffrement SSL</td><td>Palo Alto, Fortinet, Cisco Firepower</td></tr>
+              <tr><td>WAF</td><td>Spécialisé pour les applications web (couche 7) — OWASP Top 10</td><td>ModSecurity, AWS WAF, Cloudflare</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 04 -->
+        <div class="topic" id="wifi">
+          <h3 class="topic-title"><span class="number">04</span> Point d'accès Wi-Fi (AP)</h3>
+          <p>Le point d'accès crée un réseau sans fil local (WLAN) et sert de passerelle entre les équipements Wi-Fi et le réseau filaire. En entreprise, les AP sont gérés de façon centralisée par un <strong>contrôleur Wi-Fi (WLC)</strong> ou une solution cloud.</p>
+          <table class="data-table">
+            <thead><tr><th>Standard</th><th>Bandes</th><th>Débit max théorique</th><th>Technologie clé</th></tr></thead>
+            <tbody>
+              <tr><td>Wi-Fi 4 (802.11n)</td><td>2.4 GHz / 5 GHz</td><td>600 Mbps</td><td>MIMO 4×4</td></tr>
+              <tr><td>Wi-Fi 5 (802.11ac)</td><td>5 GHz</td><td>3.5 Gbps</td><td>MU-MIMO, beamforming</td></tr>
+              <tr><td>Wi-Fi 6 (802.11ax)</td><td>2.4 GHz / 5 GHz</td><td>9.6 Gbps</td><td>OFDMA, BSS Coloring, MU-MIMO 8×8</td></tr>
+              <tr><td>Wi-Fi 6E</td><td>2.4 / 5 / 6 GHz</td><td>9.6 Gbps</td><td>Spectre 6 GHz non encombré</td></tr>
+              <tr><td>Wi-Fi 7 (802.11be)</td><td>2.4 / 5 / 6 GHz</td><td>46 Gbps</td><td>MLO (Multi-Link Operation)</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box warning">
+            <div class="info-label">// sécurité Wi-Fi</div>
+            <strong>WEP</strong> (1997) — Cassé en quelques minutes, à bannir absolument.<br/>
+            <strong>WPA2</strong> (2004) — Standard actuel, sûr avec une clé forte (AES-CCMP).<br/>
+            <strong>WPA3</strong> (2018) — Résistant aux attaques par dictionnaire, authentification SAE. À préférer si possible.<br/>
+            Le protocole <strong>802.1X</strong> + RADIUS est la référence en entreprise (authentification individuelle par certificat ou identifiant).
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="topic" id="serveur">
+          <h3 class="topic-title"><span class="number">05</span> Serveur</h3>
+          <p>Un serveur est une machine (ou une machine virtuelle) dédiée à <strong>fournir des services</strong> aux clients du réseau. Il se distingue par sa haute disponibilité, ses composants redondants (PSU, disques en RAID, interfaces réseau en bonding) et ses ressources dimensionnées pour la charge.</p>
+          <table class="data-table">
+            <thead><tr><th>Type</th><th>Rôle</th><th>Logiciels courants</th></tr></thead>
+            <tbody>
+              <tr><td>Serveur Web</td><td>Héberger des sites et applications</td><td>Apache, Nginx, IIS</td></tr>
+              <tr><td>Serveur DNS</td><td>Résolution de noms de domaine</td><td>BIND9, Unbound, Windows DNS</td></tr>
+              <tr><td>Serveur DHCP</td><td>Distribution automatique d'adresses IP</td><td>ISC DHCP, dnsmasq, Windows DHCP</td></tr>
+              <tr><td>Serveur de fichiers</td><td>Partage de fichiers en réseau (SMB, NFS)</td><td>Samba, NFS, Windows File Server</td></tr>
+              <tr><td>Serveur mail</td><td>Envoi, réception et stockage d'e-mails</td><td>Postfix, Dovecot, Exchange, Zimbra</td></tr>
+              <tr><td>Serveur d'annuaire</td><td>Gestion centralisée des comptes et droits</td><td>Active Directory (AD), OpenLDAP</td></tr>
+              <tr><td>Serveur de supervision</td><td>Surveillance de l'infrastructure réseau et système</td><td>Zabbix, Nagios, Prometheus, PRTG</td></tr>
+              <tr><td>Serveur de virtualisation</td><td>Hébergement de VMs ou conteneurs</td><td>VMware ESXi, Proxmox, Hyper-V</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box">
+            <div class="info-label">// haute disponibilité</div>
+            En production, on évite les <strong>SPOF</strong> (Single Point Of Failure). Un serveur critique est généralement doublé (actif/passif ou actif/actif), avec un <strong>load balancer</strong> devant qui répartit la charge et bascule automatiquement en cas de panne.
+          </div>
+        </div>
+
+        <!-- 06 -->
+        <div class="topic" id="cablage">
+          <h3 class="topic-title"><span class="number">06</span> Câblage & Médias de transmission</h3>
+          <p>Le câblage physique est souvent sous-estimé. Un câble mal sertis ou de catégorie inadaptée peut limiter les performances de toute une infrastructure, peu importe la qualité des équipements actifs.</p>
+          <table class="data-table">
+            <thead><tr><th>Câble</th><th>Débit max</th><th>Distance max</th><th>Blindage</th><th>Usage typique</th></tr></thead>
+            <tbody>
+              <tr><td>Cat5e</td><td>1 Gbps</td><td>100 m</td><td>UTP</td><td>Réseau domestique, petit bureau</td></tr>
+              <tr><td>Cat6</td><td>10 Gbps</td><td>55 m (10G) / 100 m (1G)</td><td>UTP/FTP</td><td>Bureaux, salle serveur</td></tr>
+              <tr><td>Cat6a</td><td>10 Gbps</td><td>100 m</td><td>FTP/SFTP</td><td>Data center, déploiement structuré</td></tr>
+              <tr><td>Cat7</td><td>10 Gbps</td><td>100 m</td><td>SSTP (paires blindées)</td><td>Environnements très bruités</td></tr>
+              <tr><td>Fibre optique multimode (OM4)</td><td>100 Gbps</td><td>150 m</td><td>N/A</td><td>Baie à baie, backbone interne</td></tr>
+              <tr><td>Fibre optique monomode (OS2)</td><td>100 Gbps+</td><td>Plusieurs km</td><td>N/A</td><td>Entre bâtiments, WAN, FAI</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box success">
+            <div class="info-label">// câblage structuré</div>
+            En entreprise, on applique la norme <strong>TIA-568</strong> (Amérique) ou <strong>ISO/IEC 11801</strong> (Europe) pour le câblage structuré. Chaque poste est relié à un panneau de brassage (patch panel) dans une baie 19", lui-même connecté aux switches actifs. Cette organisation facilite les interventions et garantit la traçabilité.
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="topic" id="nic">
+          <h3 class="topic-title"><span class="number">07</span> Carte réseau (NIC)</h3>
+          <p>La <strong>NIC (Network Interface Card)</strong> est l'interface physique qui connecte un équipement au réseau. Elle possède une <strong>adresse MAC unique</strong> (48 bits, gravée en usine) qui sert à l'identification sur le réseau local.</p>
+          <p>Les serveurs utilisent souvent plusieurs NIC en <strong>bonding/teaming</strong> pour cumuler la bande passante ou assurer la redondance en cas de panne d'une carte ou d'un câble.</p>
+          <div class="code-block">
+<pre><span class="comment"># Afficher les interfaces réseau et leurs adresses MAC</span>
+<span class="keyword">$</span> ip link show
+2: eth0: &lt;BROADCAST,MULTICAST,UP&gt; mtu 1500
+    link/ether <span class="string">a4:c3:f0:1b:2d:3e</span> brd ff:ff:ff:ff:ff:ff
+
+<span class="comment"># Configurer un bonding (LACP) sous Linux</span>
+<span class="keyword">$</span> cat /etc/network/interfaces
+auto bond0
+iface bond0 inet static
+    address 192.168.1.10
+    netmask 255.255.255.0
+    bond-slaves eth0 eth1
+    bond-mode 802.3ad       <span class="comment"># LACP — agrégation active/active</span>
+    bond-miimon 100</pre>
+          </div>
+          <div class="info-box">
+            <div class="info-label">// adresse MAC</div>
+            Une adresse MAC est composée de 6 octets hexadécimaux : les 3 premiers identifient le fabricant (OUI — Organizationally Unique Identifier), les 3 derniers sont l'identifiant unique de l'appareil. Exemple : <code style="font-family:var(--mono);color:var(--accent3);">a4:c3:f0:1b:2d:3e</code> → a4:c3:f0 = Intel Corporation.
+          </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="topic" id="vlan">
+          <h3 class="topic-title"><span class="number">08</span> VLANs — Réseaux locaux virtuels</h3>
+          <p>Un <strong>VLAN (Virtual LAN)</strong> permet de segmenter logiquement un réseau physique en plusieurs réseaux isolés, sans avoir besoin de câbles séparés. Les machines d'un même VLAN communiquent librement ; celles de VLANs différents doivent passer par un routeur ou un switch L3.</p>
+          <p>Les VLANs sont définis par la norme <strong>802.1Q</strong> : un tag de 4 octets est ajouté à la trame Ethernet, contenant l'identifiant du VLAN (VID, de 1 à 4094).</p>
+          <div class="code-block">
+<pre><span class="comment"># Configuration VLANs sur un switch Cisco IOS</span>
+
+<span class="comment"># Créer les VLANs</span>
+Switch(config)# <span class="keyword">vlan 10</span>
+Switch(config-vlan)# <span class="keyword">name BUREAUX</span>
+Switch(config)# <span class="keyword">vlan 20</span>
+Switch(config-vlan)# <span class="keyword">name SERVEURS</span>
+Switch(config)# <span class="keyword">vlan 99</span>
+Switch(config-vlan)# <span class="keyword">name GESTION</span>
+
+<span class="comment"># Assigner un port en mode access (un seul VLAN)</span>
+Switch(config)# <span class="keyword">interface GigabitEthernet0/1</span>
+Switch(config-if)# <span class="keyword">switchport mode access</span>
+Switch(config-if)# <span class="keyword">switchport access vlan 10</span>
+
+<span class="comment"># Configurer un port trunk (plusieurs VLANs, vers un autre switch ou routeur)</span>
+Switch(config)# <span class="keyword">interface GigabitEthernet0/24</span>
+Switch(config-if)# <span class="keyword">switchport mode trunk</span>
+Switch(config-if)# <span class="keyword">switchport trunk allowed vlan 10,20,99</span></pre>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>VLAN</th><th>Nom</th><th>Équipements typiques</th><th>Règle de sécurité</th></tr></thead>
+            <tbody>
+              <tr><td>10</td><td>BUREAUX</td><td>Postes de travail, laptops</td><td>Accès Internet + ressources internes limitées</td></tr>
+              <tr><td>20</td><td>SERVEURS</td><td>Serveurs de fichiers, applicatifs, DNS/DHCP</td><td>Accès restreint depuis VLAN bureaux uniquement</td></tr>
+              <tr><td>30</td><td>INVITÉS</td><td>Smartphones visiteurs, appareils BYOD</td><td>Internet uniquement, aucun accès réseau interne</td></tr>
+              <tr><td>40</td><td>VOIX (VoIP)</td><td>Téléphones IP</td><td>QoS prioritaire, isolé du trafic data</td></tr>
+              <tr><td>99</td><td>GESTION</td><td>Interfaces de gestion switches, routeurs</td><td>Accès très restreint, VLAN d'administration</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 09 -->
+        <div class="topic" id="comparatif">
+          <h3 class="topic-title"><span class="number">09</span> Switch vs Routeur — Comparatif complet</h3>
+          <p>La confusion entre switch et routeur est très fréquente chez les débutants. Voici un comparatif clair :</p>
+          <table class="data-table">
+            <thead><tr><th>Critère</th><th>Switch</th><th>Routeur</th></tr></thead>
+            <tbody>
+              <tr><td>Couche OSI</td><td>Couche 2 (Liaison de données)</td><td>Couche 3 (Réseau)</td></tr>
+              <tr><td>Adresse utilisée</td><td>Adresse MAC (48 bits)</td><td>Adresse IP (32 ou 128 bits)</td></tr>
+              <tr><td>Unité échangée</td><td>Trame Ethernet</td><td>Paquet IP</td></tr>
+              <tr><td>Domaine de collision</td><td>Isolé par port</td><td>N/A (les routeurs séparent tout)</td></tr>
+              <tr><td>Domaine de broadcast</td><td>Un par VLAN</td><td>Sépare les domaines de broadcast</td></tr>
+              <tr><td>Protocoles de routage</td><td>Non (sauf switch L3)</td><td>OSPF, BGP, RIP, EIGRP…</td></tr>
+              <tr><td>NAT</td><td>Non</td><td>Oui</td></tr>
+              <tr><td>Connexion Internet</td><td>Non</td><td>Oui (via FAI)</td></tr>
+              <tr><td>Usage principal</td><td>Interconnecter machines d'un même réseau</td><td>Interconnecter réseaux différents</td></tr>
+              <tr><td>Prix indicatif</td><td>30 € – 10 000 €</td><td>50 € – 100 000 €+</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box success">
+            <div class="info-label">// switch L3</div>
+            Un <strong>switch de couche 3</strong> combine les fonctions d'un switch L2 et d'un routeur. Il peut faire du routage inter-VLAN à très haute vitesse (en hardware), ce qui réduit le besoin de routeurs dédiés dans le cœur d'un réseau d'entreprise.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a href="bases.html"    class="prev">Bases des réseaux</a>
+    <a href="securite.html" class="next">Sécurité réseau</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo">// NOPAINOGAIN.NETWORK</div>
+    <div class="footer-text">Fait avec rigueur · Appris dans la douleur · Maîtrisé dans la gloire</div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

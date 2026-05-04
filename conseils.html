@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conseils pour apprendre — No Pain No Gain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">NO<span>PAIN</span>NOGAIN<span class="cursor-blink"></span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">// accueil</a></li>
+    <li><a href="bases.html">// bases</a></li>
+    <li><a href="materiel.html">// matériel</a></li>
+    <li><a href="securite.html">// sécurité</a></li>
+    <li><a href="conseils.html" class="active">// conseils</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="breadcrumb">
+    <a href="index.html">root</a> / <span>conseils-pour-apprendre</span>
+  </div>
+
+  <div class="section">
+    <div class="content-layout">
+
+      <!-- SOMMAIRE -->
+      <aside class="sidebar">
+        <div class="sidebar-title">// sommaire</div>
+        <ul class="sidebar-nav">
+          <li><a href="#methode">01. Méthode d'apprentissage</a></li>
+          <li><a href="#roadmap">02. Feuille de route</a></li>
+          <li><a href="#competences">03. Compétences prioritaires</a></li>
+          <li><a href="#ressources">04. Ressources gratuites</a></li>
+          <li><a href="#lab">05. Monter son lab</a></li>
+          <li><a href="#certifications">06. Certifications</a></li>
+          <li><a href="#metier">07. Le métier d'admin réseau</a></li>
+        </ul>
+      </aside>
+
+      <main>
+        <div class="section-header">
+          <div class="section-tag">// module 04 — roadmap</div>
+          <h2 class="section-title">Apprendre les <span class="hl">Réseaux</span></h2>
+          <p class="section-desc">Pas de raccourci. Un plan solide, des ressources sérieuses, et de la pratique quotidienne. Voici tout ce qu'il faut savoir pour progresser efficacement.</p>
+        </div>
+
+        <!-- 01 -->
+        <div class="topic" id="methode">
+          <h3 class="topic-title"><span class="number">01</span> Méthode d'apprentissage efficace</h3>
+          <p>Apprendre les réseaux ne s'improvise pas. La plupart des débutants font les mêmes erreurs : regarder trop de vidéos sans pratiquer, vouloir tout maîtriser en même temps, ou se décourager devant la complexité du CCNA sans avoir les bases.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">→</div>
+              <div class="step-content">
+                <h4>La règle 70/30 : pratique avant tout</h4>
+                <p>Consacrez 70% de votre temps à la pratique (lab, exercices, configuration réelle) et 30% à la théorie. Lire sans pratiquer ne crée pas de compétence — seule la répétition active ancre les connaissances.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">→</div>
+              <div class="step-content">
+                <h4>Répétition espacée (Anki)</h4>
+                <p>Utilisez Anki (logiciel de flashcards) pour mémoriser les ports, acronymes, commandes CLI et concepts fondamentaux. 15 minutes par jour de révision espacée surpasse plusieurs heures de relecture passive.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">→</div>
+              <div class="step-content">
+                <h4>Apprendre en construisant quelque chose de réel</h4>
+                <p>Configurez votre propre réseau à la maison : VLANs sur un switch récupéré, serveur DHCP/DNS sur un Raspberry Pi, VPN WireGuard entre deux sites. Les projets concrets valent 10 cours théoriques.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">→</div>
+              <div class="step-content">
+                <h4>Documenter et expliquer</h4>
+                <p>Tenez un journal technique (Notion, Obsidian, simple Markdown). Expliquer un concept à voix haute ou à un collègue est le meilleur test de compréhension. Si vous ne pouvez pas l'expliquer simplement, vous ne le maîtrisez pas encore.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">→</div>
+              <div class="step-content">
+                <h4>La régularité bat l'intensité</h4>
+                <p>30 minutes chaque jour valent bien mieux qu'une session marathon de 8 heures le week-end. Le cerveau consolide les apprentissages durant le sommeil — il faut lui donner du temps entre les sessions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="topic" id="roadmap">
+          <h3 class="topic-title"><span class="number">02</span> Feuille de route recommandée</h3>
+          <p>Voici une progression logique, de zéro jusqu'au niveau professionnel. Les durées sont indicatives pour quelqu'un qui consacre 1 heure par jour à l'apprentissage :</p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Phase 1 — Fondamentaux (1–3 mois)</h4>
+                <p>Modèle OSI, TCP/IP, adressage IPv4/IPv6, subnetting, DNS, DHCP. Lecture : "Computer Networking: Top-Down Approach" (Kurose & Ross, chapitres 1 à 4). Pratiquer avec Packet Tracer dès le premier jour.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Phase 2 — CompTIA Network+ (2–4 mois)</h4>
+                <p>Structurez vos bases avec la préparation Network+. Ressources gratuites : Professor Messer (vidéos), examens blancs sur ExamCompass et MeasureUp. La certification valide les bases et est reconnue par les employeurs.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Phase 3 — Pratique intensive en lab (continu)</h4>
+                <p>GNS3 ou EVE-NG pour les labs avancés (OSPF multi-area, BGP, redondance). Construire des topologies de plus en plus complexes. Refaire les exercices jusqu'à les réussir sans regarder les notes.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Phase 4 — Cisco CCNA (3–6 mois)</h4>
+                <p>La certification la plus reconnue en administration réseau. Couvre le routage/switching, VLANs, OSPF, ACLs, NAT, VPN basics, automatisation réseau. Ressources officielles : Cisco NetAcad, Udemy (Neil Anderson, Jeremy's IT Lab — gratuit sur YouTube).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <h4>Phase 5 — Spécialisation (6–18 mois)</h4>
+                <p>Choisissez votre voie selon vos intérêts et le marché : <strong>Sécurité</strong> (CompTIA Security+, CEH, CCNA Security → OSCP), <strong>Cloud</strong> (AWS Networking, Azure Administrator), <strong>Administration avancée</strong> (CCNP Enterprise, NSE4 Fortinet).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">6</div>
+              <div class="step-content">
+                <h4>Phase 6 — Expérience professionnelle</h4>
+                <p>Stage, alternance, emploi junior, projets open source. Documentez chaque projet sur GitHub ou un portfolio. Participez à des CTFs (Capture The Flag) pour la sécurité. Contribuez sur r/networking pour affiner vos connaissances.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="topic" id="competences">
+          <h3 class="topic-title"><span class="number">03</span> Compétences prioritaires par niveau</h3>
+          <p>Pour un poste d'<strong>administrateur réseau junior</strong>, voici les compétences les plus demandées par les recruteurs en 2024 :</p>
+          <div class="skill-bars">
+            <div class="skill-row"><span class="skill-name">Adressage IP / Subnetting</span><div class="skill-track"><div class="skill-fill" style="width:100%"></div></div><span class="skill-pct">100%</span></div>
+            <div class="skill-row"><span class="skill-name">TCP/IP, DNS, DHCP</span><div class="skill-track"><div class="skill-fill" style="width:100%"></div></div><span class="skill-pct">100%</span></div>
+            <div class="skill-row"><span class="skill-name">Configuration switches (VLANs, STP)</span><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+            <div class="skill-row"><span class="skill-name">Configuration routeurs (OSPF, ACL)</span><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+            <div class="skill-row"><span class="skill-name">Firewall & règles de sécurité</span><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+            <div class="skill-row"><span class="skill-name">Linux & ligne de commande</span><div class="skill-track"><div class="skill-fill" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+            <div class="skill-row"><span class="skill-name">VPN & accès distants</span><div class="skill-track"><div class="skill-fill" style="width:75%"></div></div><span class="skill-pct">75%</span></div>
+            <div class="skill-row"><span class="skill-name">Supervision (Zabbix, Nagios)</span><div class="skill-track"><div class="skill-fill" style="width:70%"></div></div><span class="skill-pct">70%</span></div>
+            <div class="skill-row"><span class="skill-name">Scripting Python/Bash</span><div class="skill-track"><div class="skill-fill" style="width:65%"></div></div><span class="skill-pct">65%</span></div>
+            <div class="skill-row"><span class="skill-name">Cloud Networking (AWS/Azure)</span><div class="skill-track"><div class="skill-fill" style="width:55%"></div></div><span class="skill-pct">55%</span></div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">// tendances 2024–2025</div>
+            Les recruteurs cherchent de plus en plus des profils <strong>hybrides</strong> : réseau + sécurité + cloud. La maîtrise de l'automatisation réseau (Ansible, Python avec Netmiko/NAPALM) devient un vrai différenciateur. Le SDN (Software-Defined Networking) et le Zero Trust Architecture sont des tendances de fond.
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="topic" id="ressources">
+          <h3 class="topic-title"><span class="number">04</span> Ressources gratuites recommandées</h3>
+          <div class="resource-list">
+            <div class="resource-item">
+              <span class="resource-type">Vidéos</span>
+              <div>
+                <div class="resource-name">Jeremy's IT Lab (YouTube)</div>
+                <div class="resource-desc">Cours CCNA complet et gratuit sur YouTube. Qualité exceptionnelle, exercices Packet Tracer fournis. La meilleure ressource gratuite pour le CCNA en 2024.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Vidéos</span>
+              <div>
+                <div class="resource-name">Professor Messer (professormesser.com)</div>
+                <div class="resource-desc">Cours vidéo gratuits pour CompTIA Network+, Security+ et A+. Clair, structuré, régulièrement mis à jour. Complétez avec ses PDF de notes de cours gratuits.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Lab</span>
+              <div>
+                <div class="resource-name">Cisco Packet Tracer</div>
+                <div class="resource-desc">Simulateur réseau officiel Cisco, 100% gratuit après inscription sur Cisco NetAcad. Idéal pour débuter et préparer le CCNA. Supporte switches, routeurs, Wi-Fi, IoT.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Lab</span>
+              <div>
+                <div class="resource-name">GNS3 (gns3.com)</div>
+                <div class="resource-desc">Simulateur avancé utilisant de vraies images IOS. Plus réaliste que Packet Tracer. Nécessite une machine puissante. Indispensable pour les niveaux CCNP et les labs avancés.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Livre</span>
+              <div>
+                <div class="resource-name">Computer Networking: A Top-Down Approach</div>
+                <div class="resource-desc">Kurose & Ross — La référence académique mondiale. Disponible en français. Chapitres 1 à 5 couvrent 80% des fondamentaux. Exercices inclus avec corrections en ligne.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Pratique</span>
+              <div>
+                <div class="resource-name">TryHackMe (tryhackme.com)</div>
+                <div class="resource-desc">Plateforme gamifiée pour apprendre la cybersécurité et les réseaux. Parcours guidés du niveau débutant à avancé. La voie "Pre-Security" est parfaite pour les débutants. Gratuit pour l'essentiel.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Pratique</span>
+              <div>
+                <div class="resource-name">HackTheBox (hackthebox.com)</div>
+                <div class="resource-desc">Machines et labs réalistes pour la sécurité et le pentest. Niveau intermédiaire à expert. La section "Academy" propose des cours structurés sur les protocoles réseau et la sécurité.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Outils</span>
+              <div>
+                <div class="resource-name">Wireshark (wireshark.org)</div>
+                <div class="resource-desc">Analysez concrètement les protocoles en capturant votre propre trafic. Observer un vrai handshake TCP, une résolution DNS ou un échange DHCP vaut mieux que 10 schémas théoriques.</div>
+              </div>
+            </div>
+            <div class="resource-item">
+              <span class="resource-type">Communauté</span>
+              <div>
+                <div class="resource-name">Reddit r/networking + r/ccna + r/netsec</div>
+                <div class="resource-desc">Communautés actives de professionnels et étudiants. Excellentes ressources épinglées dans chaque subreddit. Le wiki r/ccna liste les meilleures ressources CCNA régulièrement mises à jour.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="topic" id="lab">
+          <h3 class="topic-title"><span class="number">05</span> Monter son home lab physique</h3>
+          <p>Rien ne remplace la pratique sur du matériel réel. Un home lab permet de comprendre des aspects impossibles à simuler : câblage physique, problèmes de SFP, comportement du matériel sous charge, gestion des pannes réelles.</p>
+          <div class="code-block">
+<pre><span class="comment"># Budget indicatif pour un home lab fonctionnel</span>
+
+<span class="comment"># Option 1 : Lab économique (~50–100 €)</span>
+Switch Cisco Catalyst 2960 (8 ports)  ← eBay ~20–30 €
+Routeur Cisco 1841 ou 2811             ← eBay ~15–25 €
+Câbles RJ45 Cat6                       ← Amazon ~10 €
+Console USB-to-Serial                  ← ~10 €
+
+<span class="comment"># Option 2 : Lab intermédiaire (~150–300 €)</span>
+Switch Cisco 3560 L3 (24 ports PoE)   ← ~60–80 €
+Routeur Cisco 2901                     ← ~40–60 €
+Raspberry Pi 4 (serveur Linux)         ← ~60 €
+NAS ou vieux PC pour virtualisation    ← ~50–100 €
+
+<span class="comment"># Option 3 : Lab virtuel (0 € si bon PC)</span>
+GNS3 + images Cisco IOS (à trouver)
+EVE-NG Community Edition (gratuit)
+Proxmox + VMs Linux pour les services</pre>
+          </div>
+          <div class="info-box success">
+            <div class="info-label">// ce que vous devrez pratiquer</div>
+            1. Configurer des VLANs et un trunk entre deux switches<br/>
+            2. Mettre en place OSPF entre plusieurs routeurs<br/>
+            3. Configurer un serveur DHCP avec des plages par VLAN<br/>
+            4. Mettre en place un VPN WireGuard site-to-site<br/>
+            5. Analyser votre propre trafic avec Wireshark<br/>
+            6. Diagnostiquer une panne réseau introduite volontairement
+          </div>
+        </div>
+
+        <!-- 06 -->
+        <div class="topic" id="certifications">
+          <h3 class="topic-title"><span class="number">06</span> Certifications — Lesquelles cibler et quand ?</h3>
+          <table class="data-table">
+            <thead><tr><th>Certification</th><th>Niveau</th><th>Organisme</th><th>Durée prépa</th><th>Coût examen</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CompTIA Network+</strong></td><td><span class="tag tag-green">Débutant</span></td><td>CompTIA</td><td>2–3 mois</td><td>~330 €</td></tr>
+              <tr><td><strong>Cisco CCNA</strong></td><td><span class="tag tag-blue">Intermédiaire</span></td><td>Cisco</td><td>4–6 mois</td><td>~330 $</td></tr>
+              <tr><td><strong>CompTIA Security+</strong></td><td><span class="tag tag-blue">Intermédiaire</span></td><td>CompTIA</td><td>2–3 mois</td><td>~370 €</td></tr>
+              <tr><td><strong>Fortinet NSE4</strong></td><td><span class="tag tag-blue">Intermédiaire</span></td><td>Fortinet</td><td>2–4 mois</td><td>Gratuit (cours + examen)</td></tr>
+              <tr><td><strong>Cisco CCNP Enterprise</strong></td><td><span class="tag tag-red">Avancé</span></td><td>Cisco</td><td>12–18 mois</td><td>2 × ~400 $</td></tr>
+              <tr><td><strong>CEH (Certified Ethical Hacker)</strong></td><td><span class="tag tag-red">Avancé</span></td><td>EC-Council</td><td>6–12 mois</td><td>~1 000 $</td></tr>
+              <tr><td><strong>OSCP</strong></td><td><span class="tag tag-red">Expert</span></td><td>OffSec</td><td>12+ mois</td><td>~1 499 $ (lab inclus)</td></tr>
+              <tr><td><strong>AWS Certified Advanced Networking</strong></td><td><span class="tag tag-red">Avancé</span></td><td>Amazon</td><td>6–12 mois</td><td>~300 $</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box">
+            <div class="info-label">// par où commencer ?</div>
+            <strong>Pour l'administration réseau :</strong> Network+ → CCNA → CCNP<br/>
+            <strong>Pour la cybersécurité :</strong> Network+ → Security+ → CEH ou OSCP<br/>
+            <strong>Pour le cloud :</strong> CCNA → AWS Cloud Practitioner → AWS Networking Specialty<br/><br/>
+            Note : la certification Fortinet NSE4 est <strong>entièrement gratuite</strong> (cours et examen en ligne) et très appréciée des recruteurs sur les équipements Fortinet, qui dominent le marché PME.
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="topic" id="metier">
+          <h3 class="topic-title"><span class="number">07</span> Le métier d'administrateur réseau</h3>
+          <p>L'administrateur réseau est responsable de la <strong>conception, l'installation, la configuration, la maintenance et la sécurité</strong> de l'infrastructure réseau d'une organisation. C'est un métier très varié qui mêle travail technique de fond et gestion d'incidents en temps réel.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">📋</div>
+              <div class="step-content">
+                <h4>Missions quotidiennes typiques</h4>
+                <p>Surveiller l'état du réseau (supervision), traiter les tickets d'incidents (lenteur, panne, accès), configurer de nouveaux équipements ou VLANs, gérer les sauvegardes de configuration, documenter les changements.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">🔧</div>
+              <div class="step-content">
+                <h4>Outils du quotidien</h4>
+                <p>SSH (PuTTY, MobaXterm), Wireshark, outils de supervision (Zabbix, PRTG, SolarWinds), ticketing (GLPI, Jira ServiceDesk), documentation (Confluence, NetBox pour la gestion d'IP/VLAN), gestionnaire de configurations (Ansible, Cisco DNA Center).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">📈</div>
+              <div class="step-content">
+                <h4>Évolution de carrière</h4>
+                <p>Admin réseau junior → Admin réseau confirmé → Architecte réseau → Lead Network Engineer → RSSI (si spécialisation sécurité) → Directeur infrastructure. Avec de l'expérience, possible de se tourner vers le consulting ou les éditeurs de solutions (Cisco, Palo Alto, Fortinet).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">💰</div>
+              <div class="step-content">
+                <h4>Salaires indicatifs en France (2024)</h4>
+                <p>Junior (0–2 ans) : 28 000–38 000 €/an. Confirmé (3–7 ans) : 38 000–55 000 €/an. Senior (7+ ans) : 55 000–75 000 €/an. Architecte / Expert : 70 000–90 000 €/an. Consultants indépendants : 600–900 €/jour.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">⚡</div>
+              <div class="step-content">
+                <h4>Les vraies difficultés du métier</h4>
+                <p>Astreintes et interventions nocturnes lors de pannes critiques. Pression lors des incidents majeurs (réseau en production coupé = entreprise à l'arrêt). Legacy : beaucoup d'entreprises ont des équipements anciens difficiles à migrer. Documentation souvent inexistante à reprendre. Rythme rapide des technologies à maîtriser.</p>
+              </div>
+            </div>
+          </div>
+          <div class="info-box success">
+            <div class="info-label">// le no pain no gain du métier</div>
+            Les premières années sont les plus dures. On commence souvent sur des tâches répétitives (câblage, tickets de niveau 1, déploiement de postes). Mais chaque incident est une occasion d'apprendre. Chaque panne résolue à 2h du matin vous donne plus d'expérience que 6 mois de cours. C'est un métier où l'expertise se construit dans la douleur — et c'est ce qui la rend précieuse.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a href="securite.html" class="prev">Sécurité réseau</a>
+    <a href="index.html"    class="next">Retour à l'accueil</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo">// NOPAINOGAIN.NETWORK</div>
+    <div class="footer-text">Fait avec rigueur · Appris dans la douleur · Maîtrisé dans la gloire</div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
